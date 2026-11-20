@@ -1,4 +1,4 @@
-type StickerName = 'stools' | 'table' | 'supper' | 'friends' | 'martini' | 'goblet' | 'tumbler' | 'coupe' | 'rocks'
+type StickerName = 'cutlery' | 'diner' | 'stools' | 'table' | 'supper' | 'friends' | 'martini' | 'goblet' | 'tumbler' | 'coupe' | 'rocks'
 
 export function Sticker({name, placement}:{name:StickerName;placement:string}) {
   return <img

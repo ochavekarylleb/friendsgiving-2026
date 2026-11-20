@@ -176,3 +176,5 @@ footer small{font:600 .97rem/1.35 var(--heading);text-transform:uppercase;letter
   .sticker-rsvp { right: var(--gutter); top: var(--section-spacing); }
   .sticker-results { left: var(--gutter); top: var(--section-spacing); }
 }
+.sticker-cutlery { --sticker-width: 1.8rem; float: right; margin: 0 .2rem .35rem .45rem; transform: rotate(10deg); }
+.sticker-food-step { --sticker-width: 4.75rem; margin-left: auto; transform: rotate(-7deg); filter: brightness(0) invert(1) sepia(.35); }

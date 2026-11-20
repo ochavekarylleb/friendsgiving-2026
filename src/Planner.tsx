@@ -126,6 +126,7 @@ export function Planner({onSave,rows,status}:{onSave:(row:Response)=>void;rows:R
         <p>Pick every date that works for you. More options mean a better chance of getting everyone together!</p>
         <p aria-live="polite">{answers.days.length} selected</p>
       </div>}
+      {step === 2 && <Sticker name="diner" placement="sticker-food-step"/>}
       {step === 3 && <Sticker name="tumbler" placement="sticker-drink-step"/>}
       {group && <fieldset className="options"><legend className="sr-only">{labels[group]}</legend>
         {choices[group].map(([value,description,icon]) => <label className="option" key={value}>

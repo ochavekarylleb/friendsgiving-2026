@@ -77,7 +77,7 @@ function App() {
         <p>Think of it as Thanksgiving, minus the family interrogation.</p></div>
         <dl className="details panel"><div><dt>Occasion</dt><dd>Friendsgiving dinner</dd></div><div><dt>Month</dt><dd>December 2026</dd></div><div><dt>Exact date</dt><dd>Group vote · December 1–15</dd></div><div><dt>Time</dt><dd>8:00 PM–12:00 AM</dd></div></dl>
         <h3 className="menu-title">What’s on the menu?</h3>
-        <div className="menu">{menu.map(([icon,title,description]) => <article key={title} className="panel"><span aria-hidden="true">{icon}</span><h4>{title}</h4>{title === 'Drinks' && <Sticker name="martini" placement="sticker-menu"/>}<p>{description}</p></article>)}</div>
+        <div className="menu">{menu.map(([icon,title,description]) => <article key={title} className="panel"><span aria-hidden="true">{icon}</span><h4>{title}</h4>{title === 'Food' && <Sticker name="cutlery" placement="sticker-cutlery"/>}{title === 'Drinks' && <Sticker name="martini" placement="sticker-menu"/>}<p>{description}</p></article>)}</div>
         <div className="closing"><Sticker name="supper" placement="sticker-closing"/><p>Come hungry, come thirsty, and come prepared to expose your competitive side.</p><a className="button" href="#planner">Let’s figure out the details</a></div>
       </section>
       <Planner onSave={onSave} rows={rows} status={status}/>
