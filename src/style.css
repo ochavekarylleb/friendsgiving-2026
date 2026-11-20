@@ -41,8 +41,7 @@ nav a:hover{border-color:var(--antique-gold)}
 .eyebrow span{margin-inline:.35rem}
 h1{font:400 clamp(4.5rem,7.3vw,6.875rem)/1.08 var(--script);margin:.23em 0 .07em;padding-inline:.08em;overflow-wrap:anywhere}
 .hero-subtitle{font:400 clamp(1.85rem,3.8vw,2.85rem)/1.2 var(--script);color:var(--ivory)}
-.hero-description{max-width:32ch;margin:1.45rem auto;color:var(--muted);font-size:1.05rem}
-.event-strip{display:flex;justify-content:center;gap:.25rem 1.4rem;flex-wrap:wrap;border-block:1px solid var(--line);padding:.75rem .25rem;margin:0 auto;max-width:26rem;font:600 1.1rem/1.3 var(--heading);letter-spacing:.07em;text-transform:uppercase}
+.event-strip{display:flex;justify-content:center;gap:.25rem 1.4rem;flex-wrap:wrap;border-block:1px solid var(--line);padding:.75rem .25rem;margin:1.25rem auto 0;max-width:26rem;font:600 1.1rem/1.3 var(--heading);letter-spacing:.07em;text-transform:uppercase}
 .tentative,.countdown{font-size:.9rem;color:var(--muted);margin:.65rem 0 1.25rem}
 .countdown{margin:1rem 0 0}
 .art{width:min(100%,365px);margin:auto;border:1px solid var(--line);padding:.4rem;background:var(--surface);outline:1px solid var(--line);outline-offset:4px}

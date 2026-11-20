@@ -62,7 +62,6 @@ function App() {
           <p className="eyebrow"><span aria-hidden="true">✦</span> You’re invited to <span aria-hidden="true">✦</span></p>
           <h1>Friendsgiving</h1>
           <p className="hero-subtitle">Dinner with friends</p>
-          <p className="hero-description">An evening of good food, questionable decisions, and even better company.</p>
           <div className="event-strip"><span>December 2026</span><span>8:00 PM–12:00 AM</span></div>
           <p className="tentative">Exact date to be decided by the group</p>
           <a className="button" href="#plan">Count me in</a>
