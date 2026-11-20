@@ -20,11 +20,22 @@ export function VoteResults({group,rows}:{group:Choice;rows:Response[]}) {
   </div>
 }
 
+function withHostAvailability(rows: Response[]): Pick<Response, 'id' | 'name' | 'color' | 'days'>[] {
+  const kai = rows.find(guest => guest.name.trim().toLowerCase() === 'kai')
+  if (kai) {
+    return rows.map(guest => guest.id === kai.id
+      ? {...guest, days: [...new Set([...guest.days, 1])]}
+      : guest)
+  }
+  return [...rows, {id:'host-kai', name:'Kai', color:'#B99273', days:[1]}]
+}
+
 export function AvailabilityResults({rows}:{rows:Response[]}) {
-  const guestsOn = (day:number) => rows.filter(guest => guest.days.includes(day))
+  const availability = withHostAvailability(rows)
+  const guestsOn = (day:number) => availability.filter(guest => guest.days.includes(day))
   const topDays = leaders(days, day => guestsOn(day).length)
   return <>
-    {!!rows.length && <div className="legend" aria-label="Guest color legend">{rows.map(guest => <Guest key={guest.id} guest={guest}/>)}</div>}
+    <div className="legend" aria-label="Guest color legend">{availability.map(guest => <Guest key={guest.id} guest={guest}/>)}</div>
     <div className="shared-calendar">
       {['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(day => <span className="weekday" key={day}>{day}</span>)}
       <div className="calendar-spacer" aria-hidden="true"/>
@@ -48,8 +59,8 @@ export function Contributions({rows}:{rows:Response[]}) {
 
 export function Results({rows,status}:{rows:Response[]; status:string}) {
   const groups = Object.keys(choices) as Choice[]
-  const guestsOn = (day:number) => rows.filter(guest => guest.days.includes(day))
-  const topDays = leaders(days, day => guestsOn(day).length)
+  const availability = withHostAvailability(rows)
+  const topDays = leaders(days, day => availability.filter(guest => guest.days.includes(day)).length)
   const winners = (group:Choice) => leaders(choices[group].map(([value]) => value as string), value => rows.filter(guest => guest[group] === value).length)
 
   return <section id="results" className="section results">

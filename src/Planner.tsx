@@ -137,8 +137,8 @@ export function Planner({onSave,rows,status}:{onSave:(row:Response)=>void;rows:R
       {(step === 1 || group || step === 5) && <section className="inline-results" aria-label="Responses so far">
         <h4>{step === 1 ? 'Who’s free so far?' : step === 5 ? 'What people are bringing' : labels[group!] + ' votes so far'}</h4>
         {status && <p>{status}</p>}
-        {!!rows.length && (step === 1 ? <AvailabilityResults rows={rows}/> : group ? <VoteResults group={group} rows={rows}/> : <Contributions rows={rows}/>)}
-        {!status && !rows.length && <p>No responses yet.</p>}
+        {step === 1 ? <AvailabilityResults rows={rows}/> : !!rows.length && (group ? <VoteResults group={group} rows={rows}/> : <Contributions rows={rows}/>)}
+        {step !== 1 && !status && !rows.length && <p>No responses yet.</p>}
       </section>}
       {step === 7 && <a className="button secondary" href={whatsappUrl(answers)} target="_blank" rel="noopener noreferrer">{db ? 'Message Kai privately' : 'Open WhatsApp to send to Kai'}</a>}
       {error && <p role="alert" className="notice">{error}</p>}
