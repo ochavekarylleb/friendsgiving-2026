@@ -150,7 +150,7 @@ footer small{font:600 .97rem/1.35 var(--heading);text-transform:uppercase;letter
   user-select: none;
 }
 
-.sticker-hero,.sticker-plan,.sticker-rsvp,.sticker-results,.sticker-footer {
+.sticker-hero,.sticker-plan,.sticker-rsvp,.sticker-footer {
   margin: 0 auto 1rem;
 }
 
@@ -164,17 +164,15 @@ footer small{font:600 .97rem/1.35 var(--heading);text-transform:uppercase;letter
 .sticker-closing { --sticker-width: clamp(5rem,11vw,8rem); margin: 0 auto .75rem; transform: rotate(-7deg); }
 .sticker-rsvp { --sticker-width: clamp(4rem,8vw,6rem); transform: rotate(9deg); }
 .sticker-drink-step { --sticker-width: 4.25rem; margin-left: auto; transform: rotate(-8deg); }
-.sticker-results { --sticker-width: clamp(4rem,8vw,6rem); transform: rotate(-8deg); }
 .sticker-contributions { --sticker-width: 5.25rem; float: right; margin-left: .75rem; }
 .sticker-footer { --sticker-width: clamp(4.5rem,9vw,7rem); transform: rotate(-8deg); }
 .contribution-panel { display: flow-root; }
 
 @media (min-width: 1150px) {
   .plan,.planner,.results { position: relative; }
-  .sticker-plan,.sticker-rsvp,.sticker-results { position: absolute; margin: 0; }
+  .sticker-plan,.sticker-rsvp { position: absolute; margin: 0; }
   .sticker-plan { left: var(--gutter); top: calc(var(--section-spacing) + 1.5rem); --sticker-width: 9rem; transform: rotate(-7deg); }
   .sticker-rsvp { right: var(--gutter); top: var(--section-spacing); }
-  .sticker-results { left: var(--gutter); top: var(--section-spacing); }
 }
 .sticker-cutlery { --sticker-width: 1.8rem; float: right; margin: 0 .2rem .35rem .45rem; transform: rotate(10deg); }
 .sticker-food-step { --sticker-width: 4.75rem; margin-left: auto; transform: rotate(-7deg); filter: brightness(0) invert(1) sepia(.35); }
