@@ -83,7 +83,7 @@ function App() {
       <Planner onSave={onSave} rows={rows} status={status}/>
       <Results rows={rows} status={status}/>
     </main>
-    <footer><Sticker name="friends" placement="sticker-footer"/><span aria-hidden="true">✦</span><p>Made with love, questionable decisions, and a lot of food.</p><small>Friendsgiving 2026 | Good food. Good drinks. Good company.</small></footer>
+    <footer><Sticker name="friends" placement="sticker-footer"/><span aria-hidden="true">✦</span><p>A gathering of people who should probably not be left unsupervised.</p><small>FRIENDSGIVING DINNER | ONE TABLE. MORE FOOD. TOO MANY PERSONALITIES.</small></footer>
   </>
 }
 
