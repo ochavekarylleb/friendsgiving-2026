@@ -71,7 +71,7 @@ function App() {
       </section>
       <section id="plan" className="section plan">
         <Sticker name="table" placement="sticker-plan"/>
-        <div className="section-heading"><p className="eyebrow">The dinner party</p><h2>So, what are we getting ourselves into?</h2>
+        <div className="section-heading"><p className="eyebrow">At Our Table</p><h2>So, what are we getting ourselves into?</h2>
         <p>Friendsgiving is our excuse to get everyone together for one night of good food, endless drinks, questionable card game strategies, and conversations that somehow last until midnight.</p>
         <p>Think of it as Thanksgiving, minus the family interrogation.</p></div>
         <dl className="details panel"><div><dt>Occasion</dt><dd>Friendsgiving dinner</dd></div><div><dt>Month</dt><dd>December 2026</dd></div><div><dt>Exact date</dt><dd>Group vote · December 1–15</dd></div><div><dt>Time</dt><dd>8:00 PM–12:00 AM</dd></div></dl>
