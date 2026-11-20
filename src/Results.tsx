@@ -1,3 +1,4 @@
+import {Sticker} from './Sticker'
 import {choices, days, labels, leaders} from './data'
 import type {Choice, Response} from './data'
 
@@ -52,6 +53,7 @@ export function Results({rows,status}:{rows:Response[]; status:string}) {
   const winners = (group:Choice) => leaders(choices[group].map(([value]) => value as string), value => rows.filter(guest => guest[group] === value).length)
 
   return <section id="results" className="section results">
+    <Sticker name="coupe" placement="sticker-results"/>
     <div className="section-heading"><p className="eyebrow">The group vote</p><h2>Everyone’s responses</h2><p>See which dates and dinner ideas are getting the most votes.</p></div>
     <p role="status" className="status">{status || (rows.length ? `${rows.length} guest${rows.length === 1 ? '' : 's'} responded` : 'No RSVPs yet. The first vote is yours.')}</p>
     <div className="panel current-plan"><div><p className="eyebrow">Tentative</p><h3>The current plan</h3></div><dl>
@@ -67,6 +69,6 @@ export function Results({rows,status}:{rows:Response[]; status:string}) {
         <VoteResults group={group} rows={rows}/>
       </div>)}
     </div>
-    <div className="panel"><h3>What everyone is bringing</h3><Contributions rows={rows}/></div>
+    <div className="panel contribution-panel"><Sticker name="rocks" placement="sticker-contributions"/><h3>What everyone is bringing</h3><Contributions rows={rows}/></div>
   </section>
 }

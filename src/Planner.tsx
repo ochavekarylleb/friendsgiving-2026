@@ -1,3 +1,4 @@
+import {Sticker} from './Sticker'
 import {useEffect, useRef, useState} from 'react'
 import {choiceSteps, choices, days, empty, labels, steps} from './data'
 import type {Answers, Choice, Response} from './data'
@@ -92,6 +93,7 @@ export function Planner({onSave,rows,status}:{onSave:(row:Response)=>void;rows:R
   }
 
   return <section id="planner" className="section planner">
+    <Sticker name="goblet" placement="sticker-rsvp"/>
     <div className="section-heading"><p className="eyebrow">The RSVP</p><h2>Friendsgiving planner</h2><p>Help pick the date and what goes on the table.</p></div>
     {saved ? <div className="panel form-panel">
       <p className="eyebrow"><Guest guest={saved}/></p>
@@ -124,6 +126,7 @@ export function Planner({onSave,rows,status}:{onSave:(row:Response)=>void;rows:R
         <p>Pick every date that works for you. More options mean a better chance of getting everyone together!</p>
         <p aria-live="polite">{answers.days.length} selected</p>
       </div>}
+      {step === 3 && <Sticker name="tumbler" placement="sticker-drink-step"/>}
       {group && <fieldset className="options"><legend className="sr-only">{labels[group]}</legend>
         {choices[group].map(([value,description,icon]) => <label className="option" key={value}>
           <input type="radio" name={group} value={value} checked={answers[group] === value} onChange={() => update(group,value)}/>

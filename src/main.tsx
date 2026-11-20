@@ -1,3 +1,4 @@
+import {Sticker} from './Sticker'
 import {useEffect,useState} from 'react'
 import {createRoot} from 'react-dom/client'
 import {columns,db,table} from './backend'
@@ -57,6 +58,7 @@ function App() {
     <main>
       <section id="invitation" className="hero">
         <div className="hero-copy">
+          <Sticker name="stools" placement="sticker-hero"/>
           <p className="eyebrow"><span aria-hidden="true">✦</span> You’re invited to <span aria-hidden="true">✦</span></p>
           <h1>Friendsgiving</h1>
           <p className="hero-subtitle">Dinner with friends</p>
@@ -69,18 +71,19 @@ function App() {
         <div className="art"><img src={import.meta.env.BASE_URL + 'invitation.png'} width="1240" height="1748" alt="Cream ink illustration of a holiday dinner table and Christmas tree on a burgundy invitation." /></div>
       </section>
       <section id="plan" className="section plan">
+        <Sticker name="table" placement="sticker-plan"/>
         <div className="section-heading"><p className="eyebrow">The dinner party</p><h2>So, what are we getting ourselves into?</h2>
         <p>Friendsgiving is our excuse to get everyone together for one night of good food, endless drinks, questionable card game strategies, and conversations that somehow last until midnight.</p>
         <p>Think of it as Thanksgiving, minus the family interrogation.</p></div>
         <dl className="details panel"><div><dt>Occasion</dt><dd>Friendsgiving dinner</dd></div><div><dt>Month</dt><dd>December 2026</dd></div><div><dt>Exact date</dt><dd>Group vote · December 1–15</dd></div><div><dt>Time</dt><dd>8:00 PM–12:00 AM</dd></div></dl>
         <h3 className="menu-title">What’s on the menu?</h3>
-        <div className="menu">{menu.map(([icon,title,description]) => <article key={title} className="panel"><span aria-hidden="true">{icon}</span><h4>{title}</h4><p>{description}</p></article>)}</div>
-        <div className="closing"><p>Come hungry, come thirsty, and come prepared to expose your competitive side.</p><a className="button" href="#planner">Let’s figure out the details</a></div>
+        <div className="menu">{menu.map(([icon,title,description]) => <article key={title} className="panel"><span aria-hidden="true">{icon}</span><h4>{title}</h4>{title === 'Drinks' && <Sticker name="martini" placement="sticker-menu"/>}<p>{description}</p></article>)}</div>
+        <div className="closing"><Sticker name="supper" placement="sticker-closing"/><p>Come hungry, come thirsty, and come prepared to expose your competitive side.</p><a className="button" href="#planner">Let’s figure out the details</a></div>
       </section>
       <Planner onSave={onSave} rows={rows} status={status}/>
       <Results rows={rows} status={status}/>
     </main>
-    <footer><span aria-hidden="true">✦</span><p>Made with love, questionable decisions, and a lot of food.</p><small>Friendsgiving 2026 | Good food. Good drinks. Good company.</small></footer>
+    <footer><Sticker name="friends" placement="sticker-footer"/><span aria-hidden="true">✦</span><p>Made with love, questionable decisions, and a lot of food.</p><small>Friendsgiving 2026 | Good food. Good drinks. Good company.</small></footer>
   </>
 }
 

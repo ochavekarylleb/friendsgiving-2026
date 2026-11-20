@@ -1,0 +1,11 @@
+type StickerName = 'stools' | 'table' | 'supper' | 'friends' | 'martini' | 'goblet' | 'tumbler' | 'coupe' | 'rocks'
+
+export function Sticker({name, placement}:{name:StickerName;placement:string}) {
+  return <img
+    src={import.meta.env.BASE_URL + 'stickers/' + name + '.webp'}
+    className={'sticker ' + placement}
+    alt=""
+    loading={placement === 'sticker-hero' ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+}
