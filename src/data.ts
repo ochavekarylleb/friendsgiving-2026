@@ -6,8 +6,6 @@ export const choices = {
 } as const
 export type Choice = keyof typeof choices
 export type Answers = {name:string; days:number[]; food:string; drink:string; dress:string; contribution:string; location:string}
-export type Response = Answers & { id:string; color:string; revision:number }
-export type EditKey = {id:string; token:string}
 export const days = Array.from({length:15}, (_, index) => index + 1)
 export const labels: Record<Choice,string> = {food:'Food',drink:'Drinks',dress:'Dress code',location:'Location'}
 export const steps = [
@@ -23,7 +21,3 @@ export const steps = [
 export const empty: Answers = {name:'',days:[],food:'',drink:'',dress:'',contribution:'',location:''}
 export const choiceSteps: Partial<Record<number,Choice>> = {2:'food',3:'drink',4:'dress',6:'location'}
 export const eventDate = new Date('2026-12-01T00:00:00+04:00')
-export function leaders<T>(items:T[], score:(item:T)=>number) {
-  const high = Math.max(0,...items.map(score))
-  return high ? items.filter(item => score(item) === high) : []
-}
