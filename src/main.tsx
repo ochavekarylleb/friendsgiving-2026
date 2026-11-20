@@ -1,7 +1,9 @@
 import {useEffect,useState} from 'react'
 import {createRoot} from 'react-dom/client'
-import {eventDate} from './data'
+import {columns,db,table} from './backend'
+import {eventDate,type Response} from './data'
 import {Planner} from './Planner'
+import {Results} from './Results'
 import './style.css'
 
 const menu = [
@@ -12,15 +14,45 @@ const menu = [
 ]
 
 function App() {
+  const [rows,setRows] = useState<Response[]>([])
+  const [status,setStatus] = useState(db ? 'Loading responses…' : 'Shared results will open once the RSVP database is connected.')
   const [remaining,setRemaining] = useState(() => Math.ceil((+eventDate - Date.now()) / 86400000))
   useEffect(() => {
     const timer = window.setInterval(() => setRemaining(Math.ceil((+eventDate - Date.now()) / 86400000)), 60000)
     return () => window.clearInterval(timer)
   },[])
+  useEffect(() => {
+    const client = db
+    if (!client) return
+    let active = true
+    let request = 0
+    async function refresh() {
+      const latest = ++request
+      const {data,error} = await client!.from(table).select(columns).order('name')
+      if (!active || latest !== request) return
+      if (error) setStatus('We couldn’t load the shared results. We’ll retry shortly.')
+      else {setRows(data as Response[]);setStatus('')}
+    }
+    const channel = client.channel('friendsgiving-results')
+      .on('postgres_changes',{event:'*',schema:'public',table},() => void refresh())
+      .subscribe(state => {if (state === 'SUBSCRIBED') void refresh()})
+    void refresh()
+    const timer = window.setInterval(refresh,15000)
+    window.addEventListener('focus',refresh)
+    return () => {
+      active = false
+      window.clearInterval(timer)
+      window.removeEventListener('focus',refresh)
+      void client.removeChannel(channel)
+    }
+  },[])
+  function onSave(row:Response) {
+    setRows(previous => [...previous.filter(guest => guest.id !== row.id),row].sort((a,b) => a.name.localeCompare(b.name)))
+  }
   return <>
     <a href="#invitation" className="skip">Skip to invitation</a>
     <header className="masthead"><a className="wordmark" href="#invitation"><span aria-hidden="true">✦</span> Friendsgiving <em>2026</em></a>
-      <nav aria-label="Main navigation"><a href="#plan">The plan</a><a href="#planner">RSVP</a></nav>
+      <nav aria-label="Main navigation"><a href="#plan">The plan</a><a href="#planner">RSVP</a><a href="#results">Results</a></nav>
     </header>
     <main>
       <section id="invitation" className="hero">
@@ -40,12 +72,13 @@ function App() {
         <div className="section-heading"><p className="eyebrow">The dinner party</p><h2>So, what are we getting ourselves into?</h2>
         <p>Friendsgiving is our excuse to get everyone together for one night of good food, endless drinks, questionable card game strategies, and conversations that somehow last until midnight.</p>
         <p>Think of it as Thanksgiving, minus the family interrogation.</p></div>
-        <dl className="details panel"><div><dt>Occasion</dt><dd>Friendsgiving dinner</dd></div><div><dt>Month</dt><dd>December 2026</dd></div><div><dt>Exact date</dt><dd>Tentative · December 1–15</dd></div><div><dt>Time</dt><dd>8:00 PM–12:00 AM</dd></div></dl>
+        <dl className="details panel"><div><dt>Occasion</dt><dd>Friendsgiving dinner</dd></div><div><dt>Month</dt><dd>December 2026</dd></div><div><dt>Exact date</dt><dd>Group vote · December 1–15</dd></div><div><dt>Time</dt><dd>8:00 PM–12:00 AM</dd></div></dl>
         <h3 className="menu-title">What’s on the menu?</h3>
         <div className="menu">{menu.map(([icon,title,description]) => <article key={title} className="panel"><span aria-hidden="true">{icon}</span><h4>{title}</h4><p>{description}</p></article>)}</div>
         <div className="closing"><p>Come hungry, come thirsty, and come prepared to expose your competitive side.</p><a className="button" href="#planner">Let’s figure out the details</a></div>
       </section>
-      <Planner/>
+      <Planner onSave={onSave} rows={rows} status={status}/>
+      <Results rows={rows} status={status}/>
     </main>
     <footer><span aria-hidden="true">✦</span><p>Made with love, questionable decisions, and a lot of food.</p><small>Friendsgiving 2026 | Good food. Good drinks. Good company.</small></footer>
   </>
