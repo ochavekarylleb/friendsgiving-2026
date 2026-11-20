@@ -18,6 +18,6 @@ Without these values the invitation and planner remain available for preview. Th
 
 The public response table stores one atomic ballot per normalized name with one stable guest color. Dates are deduplicated and constrained to December 1–15. The read-only public results update through Supabase Realtime, with a 15-second polling fallback.
 
-The private schema stores an edit-token hash separate from public results. A participant's edit URL uses a fragment so the bearer token is omitted from ordinary navigation requests. Save your private edit link to edit on another device. Updates require that token and the latest revision to avoid overwriting another edit. The session draft only preserves unfinished inputs in the current tab.
+The private schema stores an edit-token hash separate from public results. A participant's edit URL uses a fragment so the bearer token is omitted from ordinary navigation requests. Previously saved private edit links still work. Updates require that token and the latest revision to avoid overwriting another edit. The session draft only preserves unfinished inputs in the current tab.
 
 The invitation and shared answers are readable by anyone with the site URL, as requested for the group dashboard. The site asks search engines to skip indexing.

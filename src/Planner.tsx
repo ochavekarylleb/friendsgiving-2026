@@ -2,7 +2,7 @@ import {Sticker} from './Sticker'
 import {useEffect, useRef, useState} from 'react'
 import {choiceSteps, choices, days, empty, labels, steps} from './data'
 import type {Answers, Choice, Response} from './data'
-import {columns, createEditKey, db, editUrl, keyFromUrl, save, table} from './backend'
+import {columns, createEditKey, db, keyFromUrl, save, table} from './backend'
 import {AvailabilityResults, Contributions, Guest, VoteResults} from './Results'
 
 function whatsappUrl(answers:Answers) {
@@ -30,7 +30,6 @@ export function Planner({onSave,rows,status}:{onSave:(row:Response)=>void;rows:R
   const [error,setError] = useState('')
   const [busy,setBusy] = useState(!!incoming && !!db)
   const [saved,setSaved] = useState<Response|null>(null)
-  const [copied,setCopied] = useState(false)
   const heading = useRef<HTMLHeadingElement>(null)
   const changeStep = (next:number) => {setStep(next);setError('');requestAnimationFrame(() => heading.current?.focus())}
   const update = <K extends keyof Answers>(key:K,value:Answers[K]) => {setAnswers(previous => ({...previous,[key]:value}));setError('')}
@@ -99,13 +98,6 @@ export function Planner({onSave,rows,status}:{onSave:(row:Response)=>void;rows:R
       <p className="eyebrow"><Guest guest={saved}/></p>
       <h3 ref={heading} tabIndex={-1}>You’re officially part of the plan.</h3>
       <p>Your answers have been saved. Now let’s see if we can get everyone in the same room at the same time.</p>
-      <label htmlFor="edit-link">Private edit link</label>
-      <p>Save this link so you can change your RSVP from any device. Anyone with the link can edit your answers.</p>
-      <div className="copy"><input id="edit-link" readOnly value={editUrl(editKey)} onFocus={event => event.target.select()}/>
-      <button className="button secondary" onClick={async () => {
-        try {await navigator.clipboard.writeText(editUrl(editKey));setCopied(true)}
-        catch {document.getElementById('edit-link')?.focus()}
-      }}>{copied ? 'Copied' : 'Copy link'}</button></div>
       <div className="form-actions"><a className="button secondary" href={whatsappUrl(saved)} target="_blank" rel="noopener noreferrer">Message Kai</a><a className="button" href="#results">View everyone’s responses</a></div>
     </div> : <form className="panel form-panel" onSubmit={event => {event.preventDefault();void submit()}} noValidate>
       <div className="step-label"><span>{editing ? 'Editing your RSVP' : steps[step][0]}</span><span>Step {step + 1} of {steps.length}</span></div>
@@ -127,11 +119,11 @@ export function Planner({onSave,rows,status}:{onSave:(row:Response)=>void;rows:R
         <p aria-live="polite">{answers.days.length} selected</p>
       </div>}
       {step === 2 && <Sticker name="diner" placement="sticker-food-step"/>}
-      {step === 3 && <Sticker name="tumbler" placement="sticker-drink-step"/>}
       {group && <fieldset className="options"><legend className="sr-only">{labels[group]}</legend>
         {choices[group].map(([value,description,icon]) => <label className="option" key={value}>
           <input type="radio" name={group} value={value} checked={answers[group] === value} onChange={() => update(group,value)}/>
-          <span className="option-icon" aria-hidden="true">{icon}</span><span><strong>{value}</strong><small>{description}</small></span>
+          {icon && <span className="option-icon" aria-hidden="true">{icon}</span>}
+          <span><strong>{value}</strong>{description && <small>{description}</small>}</span>
         </label>)}
       </fieldset>}
       {step === 5 && <label className="field">What can you bring? (optional)<textarea value={answers.contribution} maxLength={600} rows={5} onChange={event => update('contribution',event.target.value)} placeholder="Maybe decorations, card games, snacks, desserts, extra food, drinks, or anything else you think would make the night better..."/></label>}

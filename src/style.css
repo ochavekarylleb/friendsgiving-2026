@@ -92,7 +92,6 @@ textarea{resize:vertical}
 .pick-calendar button{aspect-ratio:1.45;border:1px solid var(--line);border-radius:3px;background:var(--inset);color:var(--text)}
 .pick-calendar button:enabled:hover{border-color:var(--accent);cursor:pointer}
 .review{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
-.copy{display:flex;gap:.5rem;margin-bottom:1rem}
 .notice{border-left:3px solid var(--line);background:var(--inset);padding:.6rem .8rem}
 .results>.panel,.result-grid{margin-top:1rem}
 .status{text-align:center}
@@ -127,7 +126,6 @@ footer small{font:600 .97rem/1.35 var(--heading);text-transform:uppercase;letter
   .wordmark{font-size:1.16rem}
   nav{gap:.15rem .65rem;font-size:1.0625rem}
   .options,.result-grid{grid-template-columns:1fr}
-  .copy{flex-wrap:wrap}
   .shared-calendar{grid-template-columns:repeat(3,minmax(0,1fr))}
   .shared-calendar>.weekday,.calendar-spacer{display:none}
   .pick-calendar button{min-height:42px}
@@ -162,7 +160,6 @@ footer small{font:600 .97rem/1.35 var(--heading);text-transform:uppercase;letter
 .sticker-menu { --sticker-width: 3.75rem; float: right; margin: 0 0 .35rem .4rem; transform: rotate(8deg); }
 .sticker-closing { --sticker-width: clamp(5rem,11vw,8rem); margin: 0 auto .75rem; transform: rotate(-7deg); }
 .sticker-rsvp { --sticker-width: clamp(4rem,8vw,6rem); transform: rotate(9deg); }
-.sticker-drink-step { --sticker-width: 4.25rem; margin-left: auto; transform: rotate(-8deg); }
 .sticker-contributions { --sticker-width: 5.25rem; float: right; margin-left: .75rem; }
 .sticker-footer { --sticker-width: clamp(4.5rem,9vw,7rem); transform: rotate(-8deg); }
 .contribution-panel { display: flow-root; }

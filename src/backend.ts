@@ -15,9 +15,6 @@ export function keyFromUrl(): EditKey | null {
   const match = /^#edit=([0-9a-f-]{36})\.([0-9a-f]{64})$/.exec(location.hash)
   return match ? {id:match[1],token:match[2]} : null
 }
-export function editUrl(key:EditKey) {
-  return location.origin + location.pathname + '#edit=' + key.id + '.' + key.token
-}
 export async function save(answers:Answers, edit:EditKey, revision:number) {
   if (!db) throw new Error('RSVPs will open once the shared database is connected.')
   const {data,error} = await db.rpc('save_friendsgiving_rsvp',{

@@ -1,6 +1,6 @@
 export const choices = {
   food: [['Italian','Pasta, pizza & tiramisu','🍝'],['Mexican','Tacos, quesadillas, birria & churros','🌮'],['Filipino','Filipino dishes and comfort food','🍲'],['Japanese','Sushi, bentos & cheesecake','🍣']],
-  drink: [['Mocktails','A little sparkle','🍹'],['Matcha & Coffee','A little caffeine','☕'],['Wine','A little wine','🍷']],
+  drink: [['Mocktails'],['Matcha & Coffee'],['Wine']],
   dress: [['Pajamas','Cozy, comfortable, and absolutely no judgment.','☾'],['Color Coded','Everyone chooses or gets assigned a color.','✦'],['Costumes','Go all out. The more ridiculous, the better.','✧']],
   location: [['Kai’s Place','I’m good with hosting at Kai’s.','⌂'],['Hotel','I’d prefer a hotel or private accommodation.','◇'],['My House','We can also do it at my house!','♡']],
 } as const
