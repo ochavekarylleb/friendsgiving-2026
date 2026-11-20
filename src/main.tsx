@@ -58,7 +58,7 @@ function App() {
     <main>
       <section id="invitation" className="hero">
         <div className="hero-copy">
-          <Sticker name="stools" placement="sticker-hero"/>
+          <Sticker name="friends" placement="sticker-hero"/>
           <p className="eyebrow"><span aria-hidden="true">✦</span> You’re invited to <span aria-hidden="true">✦</span></p>
           <h1>Friendsgiving</h1>
           <p className="hero-subtitle">Dinner with friends</p>
@@ -83,7 +83,7 @@ function App() {
       <Planner onSave={onSave} rows={rows} status={status}/>
       <Results rows={rows} status={status}/>
     </main>
-    <footer><Sticker name="friends" placement="sticker-footer"/><span aria-hidden="true">✦</span><p>A gathering of people who should probably not be left unsupervised.</p><small>FRIENDSGIVING DINNER | ONE TABLE. ENDLESS FOOD. TOO MANY PERSONALITIES.</small></footer>
+    <footer><Sticker name="stools" placement="sticker-footer"/><span aria-hidden="true">✦</span><p>A gathering of people who should probably not be left unsupervised.</p><small>FRIENDSGIVING DINNER | ONE TABLE. ENDLESS FOOD. TOO MANY PERSONALITIES.</small></footer>
   </>
 }
 
